@@ -1,91 +1,252 @@
 <!DOCTYPE html>
 <html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>Scrollytelling 2025</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+        /* Variables pour les couleurs inspirées de shadcn/ui */
+        :root {
+            --background: hsl(0, 0%, 100%);
+            --foreground: hsl(222.2, 84%, 4.9%);
+            --card: hsl(0, 0%, 100%);
+            --card-foreground: hsl(222.2, 84%, 4.9%);
+            --popover: hsl(0, 0%, 100%);
+            --popover-foreground: hsl(222.2, 84%, 4.9%);
+            --primary: hsl(222.2, 47.4%, 11.2%);
+            --primary-foreground: hsl(210, 40%, 98%);
+           /* --secondary: hsl(210, 40%, 96.1%);*/
+            --secondary: hsl(155, 49%, 49%);
+            --secondary-foreground: hsl(222.2, 47.4%, 11.2%);
+            --muted: hsl(278, 40%, 96%);
+            --muted-foreground: hsl(215.4, 16.3%, 46.9%);
+            --accent: hsl(210, 40%, 96.1%);
+            --accent-foreground: hsl(222.2, 47.4%, 11.2%);
+            --destructive: hsl(0, 84.2%, 60.2%);
+            --destructive-foreground: hsl(210, 40%, 98%);
+            --border: hsl(214.3, 31.8%, 91.4%);
+            --input: hsl(214.3, 31.8%, 91.4%);
+            --ring: hsl(222.2, 84%, 4.9%);
+            --radius: 0.5rem;
+        }
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SCROLLYTELLING</title>
+        /* Styles globaux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "DM Sans", sans-serif;
+            font-optical-sizing: auto;
+        }
 
-        <link rel="stylesheet" href="style.css">
+        body {
+            color: var(--foreground);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+            background-color: #f4f4f4;
+opacity: 1;
+background-image:  radial-gradient(#600c51 1.75px, transparent 1.75px), radial-gradient(#600c51 1.75px, #f4f4f4 1.75px);
+background-size: 70px 70px;
+background-position: 0 0,35px 35px;
+        }
 
-        <!-- lien aos -->
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        .page-header {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
 
-    </head>
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 2rem;
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
 
-    <body>
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--foreground);
+        }
 
-        <section id="couverture">
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
 
-            <img src="images/couverture/couverture.jpg" alt="" srcset="">
+        .list-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background-color: var(--card);
+            transition: all 0.2s ease;
+        }
 
-        </section>
+        .list-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transform: translateY(-2px);
+        }
 
-        <section id="s01">
+        .list-content {
+            flex-grow: 1;
+            margin-right: 1rem;
+        }
 
-            <div class="div1">
-                <h1>Mobile Layouts & Grids</h1>
-            </div>
-            <div class="div2"> </div>
+        .list-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--foreground);
+        }
 
-            <div class="div3" data-aos="fade-up"> </div>
+        .list-description {
+            color: var(--muted-foreground);
+            font-size: 0.875rem;
+        }
 
-            <div class="div4" data-aos="fade-up" data-aos-delay="300"> </div>
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+            height: 2.5rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
 
-        </section>
+        .button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
 
+        .button:active {
+            transform: translateY(0);
+        }
 
+        .button-secondary {
+            background-color: var(--secondary);
+            color: var(--secondary-foreground);
+        }
 
-        <section id="s02">
+        /* Animation pour les nouveaux éléments */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-            <div class="div1s02">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque placerat auctor orci quis
-                    viverra. Duis euismod
-                    purus eu arcu sodales molestie. Phasellus sed purus quis diam fringilla dictum. Pellentesque vel
-                    felis in arcu dapibus
-                    varius. Donec mattis tempor nisi nec tincidunt. Suspendisse potenti. Sed efficitur urna ac imperdiet
-                    suscipit. Donec
-                    vitae vestibulum nibh. Etiam blandit ultricies tellus et gravida. Nunc ac nulla non justo rhoncus
-                    fringilla nec a nibh.
-                    Nulla facilisi. Donec eu tempus lorem. Maecenas faucibus mollis vehicula. Sed volutpat pharetra nisi
-                    nec facilisis.
-                    Aliquam et ultrices est.
-                    <br><br>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque placerat auctor orci quis
-                    viverra. Duis euismod
-                    purus eu arcu sodales molestie. Phasellus sed purus quis diam fringilla dictum. Pellentesque vel
-                    felis in arcu dapibus
-                    varius. Donec mattis tempor nisi nec tincidunt. Suspendisse potenti. Sed efficitur urna ac imperdiet
-                    suscipit. Donec
-                    vitae vestibulum nibh. Etiam blandit ultricies tellus et gravida. Nunc ac nulla non justo rhoncus
-                    fringilla nec a nibh.
-                    Nulla facilisi. Donec eu tempus lorem. Maecenas faucibus mollis vehicula. Sed volutpat pharetra nisi
-                    nec facilisis.
-                    Aliquam et ultrices est.
-                </p>
-            </div>
+        .fade-in {
+            animation: fadeIn 0.3s ease forwards;
+        }
+    </style>
 
-            <div class="div2s02" data-aos="flip-left"> </div>
-
-
-            <section id="s03">
-
-                <div class="div1s03" data-aos="fade-left" data-aos-delay="300" data-aos-duration="900">
-                    <p>Nulla facilisi. Donec eu tempus lorem. Maecenas faucibus mollis vehicula.</p>
-                </div>
-
-            </section>
-
-        </section>
-
-
-
-    </body>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+ 
+</head>
+<body>
+    <div class="page-header">
+        <h1>Scrollytelling 2025</h1>
+    </div>
+    
+    <div class="container">
+        <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Exemples</h2>
+        <div class="list" id="list">
+            <!-- Les éléments de liste seront ajoutés par JavaScript -->
+        </div>
+    </div>
 
     <script>
-        AOS.init();
-    </script>
+        // Données de la liste
+        const listItems = [
+            {
+                title: "01 - Démarrage avec aos",
+                description: "Démarrage d'un projet avec la librairie Animate On Scroll.",
+                link: "01/index.html"
+            },
+        ];
 
+        // Fonction pour créer un élément de liste
+        function createListItem(item, index) {
+            const listItem = document.createElement('div');
+            listItem.className = 'list-item fade-in';
+            listItem.style.animationDelay = `${index * 0.1}s`;
+            
+            const content = document.createElement('div');
+            content.className = 'list-content';
+            
+            const title = document.createElement('h3');
+            title.className = 'list-title';
+            title.textContent = item.title;
+            
+            const description = document.createElement('p');
+            description.className = 'list-description';
+            description.textContent = item.description;
+            
+            const button = document.createElement('a');
+            button.className = 'button';
+            button.href = item.link;
+            button.textContent = 'voir l\'exemple';
+            
+            content.appendChild(title);
+            content.appendChild(description);
+            listItem.appendChild(content);
+            listItem.appendChild(button);
+            
+            return listItem;
+        }
+
+        // Fonction pour ajouter les éléments à la liste
+        function renderList() {
+            const listContainer = document.getElementById('list');
+            listContainer.innerHTML = '';
+            
+            listItems.forEach((item, index) => {
+                const listItemElement = createListItem(item, index);
+                listContainer.appendChild(listItemElement);
+            });
+        }
+
+        // Initialisation de la liste
+        document.addEventListener('DOMContentLoaded', () => {
+            renderList();
+            
+            // Ajout d'un événement au bouton du header (si besoin d'actions supplémentaires)
+            document.getElementById('header-button').addEventListener('click', function() {
+                // Déjà géré par l'attribut onclick="playNote()"
+            });
+        });
+
+        // Fonction pour ajouter un nouvel élément (exemple d'utilisation)
+        function addItem(title, description, link) {
+            listItems.push({ title, description, link });
+            renderList();
+        }
+    </script>
+</body>
 </html>
